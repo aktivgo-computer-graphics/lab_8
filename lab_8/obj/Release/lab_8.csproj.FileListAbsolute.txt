@@ -1,0 +1,11 @@
+C:\Study\computer_graphics\lab_8\lab_8\bin\Release\lab_8.exe.config
+C:\Study\computer_graphics\lab_8\lab_8\bin\Release\lab_8.exe
+C:\Study\computer_graphics\lab_8\lab_8\bin\Release\lab_8.pdb
+C:\Study\computer_graphics\lab_8\lab_8\obj\Release\lab_8.csproj.AssemblyReference.cache
+C:\Study\computer_graphics\lab_8\lab_8\obj\Release\lab_8.csproj.SuggestedBindingRedirects.cache
+C:\Study\computer_graphics\lab_8\lab_8\obj\Release\lab_8.Form1.resources
+C:\Study\computer_graphics\lab_8\lab_8\obj\Release\lab_8.Properties.Resources.resources
+C:\Study\computer_graphics\lab_8\lab_8\obj\Release\lab_8.csproj.GenerateResource.cache
+C:\Study\computer_graphics\lab_8\lab_8\obj\Release\lab_8.csproj.CoreCompileInputs.cache
+C:\Study\computer_graphics\lab_8\lab_8\obj\Release\lab_8.exe
+C:\Study\computer_graphics\lab_8\lab_8\obj\Release\lab_8.pdb
