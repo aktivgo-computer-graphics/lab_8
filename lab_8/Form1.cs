@@ -15,6 +15,8 @@ namespace lab_8
     {
         private Pen MyPen;
         private List<Point> points;
+
+        private const int K = 50;
         
         public Form1()
         {
@@ -31,13 +33,101 @@ namespace lab_8
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+            DrawOxy(e.Graphics);
+            DrawSpline(e.Graphics);
+        }
+
+        private void DrawOxy(Graphics graph)
+        {
+            var maxX = ClientSize.Width;
+            var maxY = ClientSize.Height;
+            var centerX = maxX / 2;
+            var centerY = maxY / 2;
             
-            points.Add(new Point(100, 100));
-            points.Add(new Point(1000, 1000));
-            points.Add(new Point(500, 500));
-            points.Add(new Point(700, 300));
+            // Оси
+            graph.DrawLine(MyPen, 0, centerY, maxX, centerY);
+            graph.DrawLine(MyPen, centerX, 0, centerX, maxY);
             
-            e.Graphics.DrawBezier(MyPen,points[0], points[1], points[2], points[3]);
+            // Стрелки оси X
+            graph.DrawLine(MyPen, maxX, centerY, maxX - 10, centerY + 5);
+            graph.DrawLine(MyPen, maxX, centerY, maxX - 10, centerY - 5);
+            
+            // Стрелки оси Y
+            graph.DrawLine(MyPen, centerX, 0, centerX + 5, 10);
+            graph.DrawLine(MyPen, centerX, 0, centerX - 5, 10);
+            
+            // 0
+            graph.DrawString("0", new Font("Arial", 10), new SolidBrush(Color.Black),centerX + 5, centerY + 5);
+
+            for (var x = centerX + K; x < maxX; x += K)
+            {
+                // Черта
+                graph.DrawLine(MyPen, x, centerY - 5, x, centerY + 5);
+                // Подпись
+                graph.DrawString(((x - centerX) / K).ToString(), new Font("Arial", 10), new SolidBrush(Color.Black), x - 5, centerY + 5);
+            }
+            
+            for (var x = centerX - K; x > 0; x -= K)
+            {
+                // Черта
+                graph.DrawLine(MyPen, x, centerY - 5, x, centerY + 5);
+                // Подпись
+                graph.DrawString(((x - centerX) / K).ToString(), new Font("Arial", 10), new SolidBrush(Color.Black), x - 10, centerY + 5);
+            }
+            
+            for (var y = centerY + K; y < maxY; y += K)
+            {
+                // Черта
+                graph.DrawLine(MyPen, centerX - 5, y, centerX + 5, y);
+                // Подпись
+                graph.DrawString(((y - centerY) / -K).ToString(), new Font("Arial", 10), new SolidBrush(Color.Black), centerX + 7, y - 7);
+            }
+            
+            for (var y = centerY - K; y > 0; y -= K)
+            {
+                // Черта
+                graph.DrawLine(MyPen, centerX - 5, y, centerX + 5, y);
+                // Подпись
+                graph.DrawString(((y - centerY) / -K).ToString(), new Font("Arial", 10), new SolidBrush(Color.Black), centerX + 7, y - 7);
+            }
+        }
+
+        private void DrawSpline(Graphics graph)
+        {
+            try
+            {
+                var p1X = int.Parse(textBoxP1X.Text);
+                var p1Y = int.Parse(textBoxP1Y.Text);
+                var p2X = int.Parse(textBoxP2X.Text);
+                var p2Y = int.Parse(textBoxP2Y.Text);
+                var p3X = int.Parse(textBoxP3X.Text);
+                var p3Y = int.Parse(textBoxP3Y.Text);
+                var p4X = int.Parse(textBoxP4X.Text);
+                var p4Y = int.Parse(textBoxP4Y.Text);
+                
+                points.Add(ToScreenCoordinates(p1X, p1Y));
+                points.Add(ToScreenCoordinates(p2X, p2Y));
+                points.Add(ToScreenCoordinates(p3X, p3Y));
+                points.Add(ToScreenCoordinates(p4X, p4Y));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(textBoxP1X.Text);
+                Console.WriteLine(textBoxP2X.Text);
+                Console.WriteLine(textBoxP3X.Text);
+                Console.WriteLine(textBoxP4X.Text);
+                return;
+            }
+            
+            graph.DrawBezier(MyPen,points[0], points[1], points[2], points[3]);
+        }
+
+        private Point ToScreenCoordinates(int x, int y)
+        {
+            var centerX = ClientSize.Width / 2;
+            var centerY = ClientSize.Height / 2;
+
+            return new Point(K * (centerX + x), K * (centerY - y));
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
