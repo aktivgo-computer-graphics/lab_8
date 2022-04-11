@@ -16,13 +16,28 @@ namespace lab_8
         private Pen MyPen;
         private List<Point> points;
 
-        private const int K = 50;
+        private const int K = 25;
         
         public Form1()
         {
             InitializeComponent();
             MyPen = new Pen(Color.Black);
             points = new List<Point>();
+            
+            InitStartSpline();
+        }
+
+        private void InitStartSpline()
+        {
+            textBoxP1X.Text = @"-25";
+            textBoxP1Y.Text = @"20";
+            textBoxP2X.Text = @"30";
+            textBoxP2Y.Text = @"-40";
+            textBoxP3X.Text = @"-60";
+            textBoxP3Y.Text = @"-30";
+            textBoxP4X.Text = @"30";
+            textBoxP4Y.Text = @"15";
+            
         }
         
         private void button_Click(object sender, EventArgs e)
@@ -104,6 +119,8 @@ namespace lab_8
                 var p3Y = int.Parse(textBoxP3Y.Text);
                 var p4X = int.Parse(textBoxP4X.Text);
                 var p4Y = int.Parse(textBoxP4Y.Text);
+
+                errorLabel.Text = textBoxP1X.Text;
                 
                 points.Add(ToScreenCoordinates(p1X, p1Y));
                 points.Add(ToScreenCoordinates(p2X, p2Y));
@@ -112,13 +129,11 @@ namespace lab_8
             }
             catch (Exception e)
             {
-                Console.WriteLine(textBoxP1X.Text);
-                Console.WriteLine(textBoxP2X.Text);
-                Console.WriteLine(textBoxP3X.Text);
-                Console.WriteLine(textBoxP4X.Text);
+                errorLabel.Text = e.Message;
                 return;
             }
-            
+
+            errorLabel.Text = points[0].ToString();
             graph.DrawBezier(MyPen,points[0], points[1], points[2], points[3]);
         }
 
@@ -127,7 +142,7 @@ namespace lab_8
             var centerX = ClientSize.Width / 2;
             var centerY = ClientSize.Height / 2;
 
-            return new Point(K * (centerX + x), K * (centerY - y));
+            return new Point((centerX + K * x), (centerY - K * y));
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

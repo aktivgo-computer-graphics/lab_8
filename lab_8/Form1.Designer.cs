@@ -42,6 +42,7 @@
             this.textBoxP2Y = new System.Windows.Forms.TextBox();
             this.textBoxP3Y = new System.Windows.Forms.TextBox();
             this.textBoxP4Y = new System.Windows.Forms.TextBox();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button
@@ -155,12 +156,21 @@
             this.textBoxP4Y.Size = new System.Drawing.Size(50, 26);
             this.textBoxP4Y.TabIndex = 7;
             // 
+            // errorLabel
+            // 
+            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.errorLabel.Location = new System.Drawing.Point(11, 176);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(150, 23);
+            this.errorLabel.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxP4Y);
             this.Controls.Add(this.textBoxP4X);
@@ -182,6 +192,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Label errorLabel;
 
         private System.Windows.Forms.TextBox textBoxP1Y;
         private System.Windows.Forms.TextBox textBoxP2Y;
