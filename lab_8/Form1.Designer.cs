@@ -184,6 +184,7 @@
             this.Controls.Add(this.textBoxP1Y);
             this.Controls.Add(this.textBoxP1X);
             this.Controls.Add(this.button);
+            this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Кривая Безье";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

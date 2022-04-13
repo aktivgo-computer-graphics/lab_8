@@ -16,7 +16,7 @@ namespace lab_8
         private Pen MyPen;
         private List<Point> points;
 
-        private const int K = 25;
+        private const int K = 15;
         
         public Form1()
         {
@@ -109,6 +109,8 @@ namespace lab_8
 
         private void DrawSpline(Graphics graph)
         {
+            points = new List<Point>();
+            
             try
             {
                 var p1X = int.Parse(textBoxP1X.Text);
@@ -120,21 +122,17 @@ namespace lab_8
                 var p4X = int.Parse(textBoxP4X.Text);
                 var p4Y = int.Parse(textBoxP4Y.Text);
 
-                errorLabel.Text = textBoxP1X.Text;
-                
                 points.Add(ToScreenCoordinates(p1X, p1Y));
                 points.Add(ToScreenCoordinates(p2X, p2Y));
                 points.Add(ToScreenCoordinates(p3X, p3Y));
                 points.Add(ToScreenCoordinates(p4X, p4Y));
+                
+                graph.DrawBezier(MyPen,points[0], points[1], points[2], points[3]);
             }
             catch (Exception e)
             {
                 errorLabel.Text = e.Message;
-                return;
             }
-
-            errorLabel.Text = points[0].ToString();
-            graph.DrawBezier(MyPen,points[0], points[1], points[2], points[3]);
         }
 
         private Point ToScreenCoordinates(int x, int y)
